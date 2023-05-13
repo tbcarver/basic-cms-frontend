@@ -4,7 +4,7 @@ import strapiApi from "~/services/strapiApi";
 import type { StrapiPage } from "~/services/strapiTypes";
 import OneColumnLayout from "~/components/oneColumnLayout";
 
-function IndexPage({ strapiPage }: { strapiPage: StrapiPage }) {
+function SlugPage({ strapiPage }: { strapiPage: StrapiPage }) {
   if (!strapiPage) {
     return (
       <OneColumnLayout>
@@ -27,22 +27,20 @@ function IndexPage({ strapiPage }: { strapiPage: StrapiPage }) {
 }
 
 export async function getStaticPaths() {
-  console.log('getStaticPaths');
   const pages = await strapiApi.getPages();
-  const paths = pages.map((page) => ({ params: { slug: [page.attributes.slug] } }));
+  const paths = pages
+    .filter((page) => page.attributes.slug !== 'index')
+    .map((page) => ({ params: { slug: [page.attributes.slug] } }));
 
-  console.log(JSON.stringify(paths));
+  console.log(`Slugs: ${JSON.stringify(paths)}`);
   return { paths, fallback: true };
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  console.log('getStaticProps');
   const { slug: slugArray } = context.params as { slug: string[] };
   const slug = slugArray.join('/');
   const page = await strapiApi.getPage(slug);
 
-  console.log(slug);
-  // console.log(page);
   if (page.meta.pagination.total === 0) {
     return { notFound: true };
   }
@@ -54,4 +52,4 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return { props: { strapiPage: page.data[0] } };
 }
 
-export default IndexPage as NextPage;
+export default SlugPage as NextPage;

@@ -11,6 +11,17 @@ export interface StrapiPage {
   };
 }
 
+export interface StrapiComponent {
+  id: number;
+  attributes: {
+    name: string;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  };
+}
+
 export interface StrapiPagination {
   page: number;
   pageSize: number;

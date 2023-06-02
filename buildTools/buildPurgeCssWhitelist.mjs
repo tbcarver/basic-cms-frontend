@@ -23,9 +23,9 @@ dotenv.config();
   const tailwindConfigContent = fs.readFileSync(tailwindConfigPath, 'utf8');
 
   let lines = tailwindConfigContent.split('\n');
-  const whitelistLineIndex = lines.findIndex(line => line.trim().startsWith('whitelist:'));
+  const whitelistLineIndex = lines.findIndex(line => line.trim().startsWith('safelist:'));
 
-  lines[whitelistLineIndex] = `      whitelist: ${JSON.stringify(whitelist)},`;
+  lines[whitelistLineIndex] = `      safelist: ${JSON.stringify(whitelist)},`;
   fs.writeFileSync('./tailwind.config.ts', lines.join('\n'));
 
   console.log('Updated tailwind.config.ts file with the purge whitelist');

@@ -4,7 +4,7 @@ export default {
   purge: {
     content: ['./src/pages/**/*.{js,ts,jsx,tsx}'],
     options: {
-      whitelist: [],
+      safelist: [],
     },
   },
   theme: {

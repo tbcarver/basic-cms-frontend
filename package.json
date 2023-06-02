@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild:css-whitelist": "node ./src/buildTools/buildPurgeCssWhitelist.mjs",
+    "prebuild:css-whitelist": "node ./buildTools/buildPurgeCssWhitelist.mjs",
     "build": "next build",
     "build:start": "npm run build && npm run export && npm run start:exported",
     "dev": "next dev",

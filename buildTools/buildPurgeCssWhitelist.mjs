@@ -19,7 +19,7 @@ dotenv.config();
   console.log(whitelist);
 
   const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-  const tailwindConfigPath = path.resolve(__dirname, '../../tailwind.config.ts');
+  const tailwindConfigPath = path.resolve(__dirname, '../tailwind.config.ts');
   const tailwindConfigContent = fs.readFileSync(tailwindConfigPath, 'utf8');
 
   let lines = tailwindConfigContent.split('\n');
